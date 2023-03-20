@@ -17,7 +17,7 @@ async function signupController(req, res) {
     const hashConfirmPassword = await bcrypt.hash(confirmPassword, salt);
     if (hashPassword !== hashConfirmPassword)
       return res.status(401).json({ msg: "Passwords do not match" });
-    console.log(data);
+    // console.log(data);
     // to create a document inside userModel
     let newUser = await FooduserModel.create({
       email,
