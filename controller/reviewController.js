@@ -77,9 +77,33 @@ async function getReviewByID(req, res) {
     });
   }
 }
+
+async function deleteReview(req, res) {
+  const reviewId = req.body.id;
+  const userId = req.user._id; // assuming the user ID is stored in req.user
+
+  try {
+    const review = await Review.findById(reviewId);
+    if (!review) {
+      return res.status(404).send("Review not found");
+    }
+    if (review.user.toString() !== userId) {
+      return res.status(403).send("Unauthorized");
+    }
+    await review.remove();
+    res.status(200).json({
+      message: "Review deleted successfully",
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal server error");
+  }
+}
+
 module.exports = {
   createReviewController,
   getAllReviewController,
   getTop3Reviews,
   getReviewByID,
+  deleteReview,
 };
