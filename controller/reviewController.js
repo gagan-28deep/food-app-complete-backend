@@ -81,4 +81,5 @@ module.exports = {
   createReviewController,
   getAllReviewController,
   getTop3Reviews,
+  getReviewByID,
 };
