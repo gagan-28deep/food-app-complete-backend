@@ -79,7 +79,7 @@ async function getReviewByID(req, res) {
 }
 
 async function deleteReview(req, res) {
-  const reviewId = req.body.id;
+  const reviewId = req.params.id;
   const userId = req.user._id; // assuming the user ID is stored in req.user
 
   try {
